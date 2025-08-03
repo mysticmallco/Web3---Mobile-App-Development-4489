@@ -1,0 +1,385 @@
+# ========================
+# NETLIFY CMS CONFIG.YML
+# Paraíso Elemental - Configuração do CMS
+# ========================
+
+backend:
+  name: git-gateway
+  branch: main
+  squash_merges: true
+
+# Configuração de mídia
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+# Configurações gerais
+site_url: https://paraiso-elemental.netlify.app
+display_url: https://paraiso-elemental.netlify.app
+logo_url: /assets/images/logo-paraiso.png
+
+# Configuração local para desenvolvimento
+local_backend: true
+
+# Slug personalizado para URLs amigáveis
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
+
+# ========================
+# COLEÇÕES DO CMS
+# ========================
+
+collections:
+  # ========================
+  # CONFIGURAÇÕES GLOBAIS
+  # ========================
+  - name: "config"
+    label: "⚙️ Configurações Globais"
+    files:
+      - name: "site-config"
+        label: "🌟 Configurações do Site"
+        file: "_data/config.json"
+        fields:
+          - { label: "Nome do Site", name: "site_name", widget: "string", default: "Paraíso Elemental" }
+          - { label: "Descrição", name: "description", widget: "text" }
+          - { label: "Logo", name: "logo", widget: "image" }
+          - { label: "Favicon", name: "favicon", widget: "image" }
+          - { label: "Email de Contato", name: "contact_email", widget: "string" }
+          - { label: "Telefone", name: "phone", widget: "string", required: false }
+          - label: "Redes Sociais"
+            name: "social"
+            widget: "object"
+            fields:
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
+              - { label: "YouTube", name: "youtube", widget: "string", required: false }
+              - { label: "WhatsApp", name: "whatsapp", widget: "string", required: false }
+          - label: "Cores do Tema"
+            name: "theme_colors"
+            widget: "object"
+            fields:
+              - { label: "Cor Primária", name: "primary", widget: "color", default: "#8B4A9C" }
+              - { label: "Cor Secundária", name: "secondary", widget: "color", default: "#4A8B9C" }
+              - { label: "Cor de Destaque", name: "accent", widget: "color", default: "#FFD700" }
+
+  # ========================
+  # PÁGINA HOME
+  # ========================
+  - name: "home"
+    label: "🏠 Página Home"
+    files:
+      - name: "home-content"
+        label: "📝 Conteúdo da Home"
+        file: "_data/home.json"
+        fields:
+          # Hero Section
+          - label: "🌟 Seção Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Título Principal", name: "title", widget: "string" }
+              - { label: "Subtítulo", name: "subtitle", widget: "text" }
+              - { label: "Imagem de Fundo", name: "background_image", widget: "image" }
+              - { label: "Vídeo de Fundo (URL)", name: "background_video", widget: "string", required: false }
+              - { label: "Texto do Botão", name: "cta_text", widget: "string" }
+              - { label: "Link do Botão", name: "cta_link", widget: "string" }
+          
+          # Sobre Section
+          - label: "👤 Seção Sobre"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Descrição", name: "description", widget: "markdown" }
+              - { label: "Foto Perfil", name: "profile_image", widget: "image" }
+              - label: "Certificações"
+                name: "certifications"
+                widget: "list"
+                fields:
+                  - { label: "Nome", name: "name", widget: "string" }
+                  - { label: "Ícone", name: "icon", widget: "image", required: false }
+          
+          # Serviços
+          - label: "✨ Serviços Principais"
+            name: "services"
+            widget: "list"
+            fields:
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Descrição", name: "description", widget: "text" }
+              - { label: "Ícone", name: "icon", widget: "image" }
+              - { label: "Link", name: "link", widget: "string", required: false }
+              - { label: "Preço", name: "price", widget: "string", required: false }
+          
+          # Depoimentos
+          - label: "💬 Depoimentos"
+            name: "testimonials"
+            widget: "list"
+            fields:
+              - { label: "Nome", name: "name", widget: "string" }
+              - { label: "Depoimento", name: "text", widget: "text" }
+              - { label: "Foto", name: "image", widget: "image", required: false }
+              - { label: "Avaliação (1-5)", name: "rating", widget: "number", min: 1, max: 5 }
+
+  # ========================
+  # BLOG
+  # ========================
+  - name: "blog"
+    label: "📝 Blog"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Autor", name: "author", widget: "string", default: "Layze Silva" }
+      - { label: "Descrição Resumida", name: "excerpt", widget: "text" }
+      - { label: "Imagem Destacada", name: "featured_image", widget: "image" }
+      - label: "Categoria"
+        name: "category"
+        widget: "select"
+        options:
+          - "Astrologia"
+          - "Reiki"
+          - "Cristais"
+          - "Meditação"
+          - "Espiritualidade"
+          - "Alquimia"
+          - "Neuropsicopedagogia"
+          - "Arte Terapia"
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+        field: { label: "Tag", name: "tag", widget: "string" }
+      - { label: "Conteúdo", name: "body", widget: "markdown" }
+      - { label: "Publicado", name: "published", widget: "boolean", default: true }
+      - { label: "Em Destaque", name: "featured", widget: "boolean", default: false }
+
+  # ========================
+  # LOJA / PRODUTOS
+  # ========================
+  - name: "products"
+    label: "🛍️ Loja - Produtos"
+    folder: "_products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nome do Produto", name: "title", widget: "string" }
+      - { label: "Descrição Curta", name: "short_description", widget: "text" }
+      - { label: "Descrição Completa", name: "body", widget: "markdown" }
+      - { label: "Preço", name: "price", widget: "number", step: 0.01 }
+      - { label: "Preço com Desconto", name: "sale_price", widget: "number", step: 0.01, required: false }
+      - label: "Imagens do Produto"
+        name: "images"
+        widget: "list"
+        field: { label: "Imagem", name: "image", widget: "image" }
+      - label: "Categoria"
+        name: "category"
+        widget: "select"
+        options:
+          - "Cristais"
+          - "Joias Artesanais"
+          - "Óleos Essenciais"
+          - "Livros Espirituais"
+          - "Cartas Oraculares"
+          - "Incensos"
+          - "Velas Energéticas"
+          - "Arte Terapêutica"
+      - { label: "Estoque", name: "stock", widget: "number", default: 1 }
+      - { label: "SKU", name: "sku", widget: "string", required: false }
+      - { label: "Peso (kg)", name: "weight", widget: "number", step: 0.01, required: false }
+      - { label: "Disponível", name: "available", widget: "boolean", default: true }
+      - { label: "Produto em Destaque", name: "featured", widget: "boolean", default: false }
+      - label: "Propriedades Energéticas"
+        name: "energy_properties"
+        widget: "list"
+        allow_add: true
+        field: { label: "Propriedade", name: "property", widget: "string" }
+
+  # ========================
+  # CURSOS
+  # ========================
+  - name: "courses"
+    label: "🎓 Cursos"
+    folder: "_courses"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nome do Curso", name: "title", widget: "string" }
+      - { label: "Descrição Resumida", name: "excerpt", widget: "text" }
+      - { label: "Descrição Completa", name: "body", widget: "markdown" }
+      - { label: "Imagem do Curso", name: "image", widget: "image" }
+      - { label: "Preço", name: "price", widget: "number", step: 0.01 }
+      - { label: "Duração (horas)", name: "duration", widget: "number" }
+      - { label: "Nível", name: "level", widget: "select", options: ["Iniciante", "Intermediário", "Avançado"] }
+      - label: "Modalidade"
+        name: "modality"
+        widget: "select"
+        options: ["Online", "Presencial", "Híbrido"]
+      - label: "Categoria"
+        name: "category"
+        widget: "select"
+        options:
+          - "Reiki"
+          - "Astrologia"
+          - "Cristaloterapia"
+          - "Numerologia"
+          - "Tarô"
+          - "Meditação"
+          - "Neuropsicopedagogia"
+          - "Arte Terapia"
+      - label: "O que você vai aprender"
+        name: "learning_objectives"
+        widget: "list"
+        field: { label: "Objetivo", name: "objective", widget: "string" }
+      - label: "Módulos do Curso"
+        name: "modules"
+        widget: "list"
+        fields:
+          - { label: "Título do Módulo", name: "title", widget: "string" }
+          - { label: "Descrição", name: "description", widget: "text" }
+          - { label: "Duração", name: "duration", widget: "string" }
+      - { label: "Certificado Incluso", name: "certificate", widget: "boolean", default: true }
+      - { label: "Vagas Disponíveis", name: "spots_available", widget: "number", required: false }
+      - { label: "Data de Início", name: "start_date", widget: "datetime", required: false }
+      - { label: "Ativo", name: "active", widget: "boolean", default: true }
+
+  # ========================
+  # ÁREA DE MEMBROS
+  # ========================
+  - name: "membership"
+    label: "👥 Área de Membros"
+    files:
+      - name: "membership-config"
+        label: "⚙️ Configurações da Membership"
+        file: "_data/membership.json"
+        fields:
+          - label: "🌟 Planos de Membership"
+            name: "plans"
+            widget: "list"
+            fields:
+              - { label: "Nome do Plano", name: "name", widget: "string" }
+              - { label: "Descrição", name: "description", widget: "text" }
+              - { label: "Preço Mensal", name: "monthly_price", widget: "number", step: 0.01 }
+              - { label: "Preço Anual", name: "yearly_price", widget: "number", step: 0.01, required: false }
+              - label: "Benefícios"
+                name: "benefits"
+                widget: "list"
+                field: { label: "Benefício", name: "benefit", widget: "string" }
+              - { label: "Cor do Plano", name: "color", widget: "color" }
+              - { label: "Plano Popular", name: "popular", widget: "boolean", default: false }
+          
+          - label: "📚 Conteúdo Exclusivo"
+            name: "exclusive_content"
+            widget: "list"
+            fields:
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Tipo", name: "type", widget: "select", options: ["Vídeo", "PDF", "Áudio", "Live"] }
+              - { label: "Descrição", name: "description", widget: "text" }
+              - { label: "Nível Necessário", name: "required_level", widget: "select", options: ["Básico", "Premium", "VIP"] }
+              - { label: "Data de Publicação", name: "publish_date", widget: "datetime" }
+
+  # ========================
+  # EVENTOS E WORKSHOPS
+  # ========================
+  - name: "events"
+    label: "📅 Eventos & Workshops"
+    folder: "_events"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Nome do Evento", name: "title", widget: "string" }
+      - { label: "Descrição", name: "body", widget: "markdown" }
+      - { label: "Imagem do Evento", name: "image", widget: "image" }
+      - { label: "Data e Hora", name: "datetime", widget: "datetime" }
+      - { label: "Duração (horas)", name: "duration", widget: "number", step: 0.5 }
+      - { label: "Local", name: "location", widget: "string" }
+      - { label: "Endereço", name: "address", widget: "text", required: false }
+      - { label: "Link do Evento Online", name: "online_link", widget: "string", required: false }
+      - { label: "Preço", name: "price", widget: "number", step: 0.01 }
+      - { label: "Vagas Limitadas", name: "limited_spots", widget: "number", required: false }
+      - label: "Tipo de Evento"
+        name: "event_type"
+        widget: "select"
+        options: ["Workshop", "Palestra", "Vivência", "Retiro", "Curso Intensivo"]
+      - { label: "Evento Ativo", name: "active", widget: "boolean", default: true }
+
+  # ========================
+  # CONSULTAS E ATENDIMENTOS
+  # ========================
+  - name: "services"
+    label: "🔮 Serviços & Consultas"
+    folder: "_services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nome do Serviço", name: "title", widget: "string" }
+      - { label: "Descrição Completa", name: "body", widget: "markdown" }
+      - { label: "Imagem", name: "image", widget: "image" }
+      - { label: "Preço", name: "price", widget: "number", step: 0.01 }
+      - { label: "Duração (minutos)", name: "duration", widget: "number" }
+      - label: "Modalidade"
+        name: "modality"
+        widget: "select"
+        options: ["Presencial", "Online", "Ambos"]
+      - label: "Categoria"
+        name: "category"
+        widget: "select"
+        options:
+          - "Consulta Astrológica"
+          - "Sessão de Reiki"
+          - "Leitura de Tarô"
+          - "Terapia com Cristais"
+          - "Mapa Astral"
+          - "Numerologia"
+          - "Orientação Espiritual"
+          - "Neuropsicopedagogia"
+      - { label: "Disponível para Agendamento", name: "bookable", widget: "boolean", default: true }
+      - label: "Horários Disponíveis"
+        name: "available_times"
+        widget: "list"
+        field: { label: "Horário", name: "time", widget: "string" }
+
+  # ========================
+  # PÁGINAS ESTÁTICAS
+  # ========================
+  - name: "pages"
+    label: "📄 Páginas"
+    files:
+      - name: "about"
+        label: "Sobre Mim"
+        file: "about.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Conteúdo", name: "body", widget: "markdown" }
+      
+      - name: "contact"
+        label: "Contato"
+        file: "contact.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Conteúdo", name: "body", widget: "markdown" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Telefone", name: "phone", widget: "string" }
+          - { label: "Endereço", name: "address", widget: "text" }
+
+# ========================
+# EDITOR SETTINGS
+# ========================
+editor:
+  preview: true
+  
+# Configuração para desenvolvimento local
+local_backend: true
+
+# Configuração de autenticação
+publish_mode: editorial_workflow
+
+# Extensões de arquivo suportadas
+media_library:
+  name: uploadcare
+  config:
+    publicKey: "demopublickey"
+    multiple: true
+    tabs: "file camera url facebook gdrive gphotos dropbox instagram"
+    effects: "crop,rotate,enhance,grayscale"

@@ -1,0 +1,1007 @@
+
+# PARAÍSO ELEMENTAL - PROJETO COMPLETO
+# Portal Místico Web3 com CMS e E-commerce Integrado
+
+## ESTRUTURA DO PROJETO
+
+Paraíso_Elemental/
+├── index.html                    # Landing Page com Portal
+├── home.html                     # Página Principal
+├── blog.html                     # Blog com CMS
+├── shop.html                     # Loja de Artesanatos
+├── cursos.html                   # Catálogo de Cursos
+├── members.html                  # Área de Membros
+├── checkout.html                 # Carrinho e Pagamento
+├── client-area.html              # Área do Cliente
+├── contact.html                  # Contato e Cadastro
+├── login.html                    # Login/Registro
+├── admin/
+│   ├── index.html                # Netlify CMS Admin
+│   └── config.yml                # Configuração CMS
+├── assets/
+│   ├── css/
+│   │   ├── styles.css            # Estilos principais
+│   │   ├── cosmic-bg.css         # Background cósmico
+│   │   └── animations.css        # Animações
+│   ├── js/
+│   │   ├── main.js               # JavaScript principal
+│   │   ├── portal.js             # Animações do portal
+│   │   ├── payments.js           # Integrações de pagamento
+│   │   ├── web3.js               # Funcionalidades Web3
+│   │   └── cms-integration.js    # Integração CMS
+│   ├── images/
+│   │   ├── logo.png
+│   │   ├── portal.png            # Portal animado
+│   │   ├── virgo-constellation.svg
+│   │   ├── fairy-cursor.png
+│   │   └── products/
+│   ├── sounds/
+│   │   ├── fairy-ting_light_adpcm.wav
+│   │   ├── Whispering_Paraiso_Elemental_Light_adpcm.wav
+│   │   └── portal-enter.ogg
+│   └── fonts/
+├── _data/
+│   ├── members-plans.json        # Planos de membros
+│   ├── products.json             # Produtos da loja
+│   └── courses.json              # Cursos disponíveis
+├── manifest.json                 # PWA Manifest
+├── service-worker.js             # Service Worker
+├── _redirects                    # Redirects Netlify
+├── netlify.toml                  # Configuração Netlify
+└── README.md
+
+## 1. INDEX.HTML - LANDING PAGE COM PORTAL
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paraíso Elemental - Portal Ancestral</title>
+    <meta name="description" content="Portal da Alquimia ancestral. Neuropsicopedagogia, arte visual, joias sagradas, artesanato, terapia tradicional e holística e Reiki. Transformação através dos elementos.">
+    <meta name="keywords" content="alquimia, neuropsicopedagogia, reiki, terapia holística, joias sagradas, arte mística">
+    <meta name="author" content="Paraíso Elemental">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Paraíso Elemental - Portal Místico">
+    <meta property="og:description" content="Portal da alquimia ancestral - Transformação através dos elementos">
+    <meta property="og:image" content="assets/images/portal.png">
+    <meta property="og:url" content="https://ipfs.io/ipfs/Qme6TfN8qLVJ1AbBJjmmvFoqgdvBSBxix2xQauYN5x5yC6">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Paraíso Elemental">
+    <meta name="twitter:description" content="Paraíso Twitts">
+    <meta name="twitter:image" content="assets/images/portal.png">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a0d3e">
+    <link rel="apple-touch-icon" href="assets/images/icons/icon-192.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/cosmic-bg.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Paraíso Elemental",
+        "description": "Portal da Alquimia ancestral",
+        "url": "https://ipfs.io/ipfs/Qme6TfN8qLVJ1AbBJjmmvFoqgdvBSBxix2xQauYN5x5yC6",
+        "logo": "https://ipfs.io/ipfs/Qme6TfN8qLVJ1AbBJjmmvFoqgdvBSBxix2xQauYN5x5yC6/assets/images/logo.png",
+        "sameAs": [
+            "https://instagram.com/paraisoelemental",
+            "https://facebook.com/paraisoelemental"
+        ]
+    }
+    </script>
+</head>
+<body class="cosmic-bg" data-theme="dark">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="cosmic-loader"></div>
+        <p class="loading-text" data-translate="loading">Conectando ao Portal PE...</p>
+    </div>
+
+    <!-- Cosmic Background -->
+    <div class="cosmic-container">
+        <div class="stars-layer"></div>
+        <div class="virgo-constellation"></div>
+        <div class="cosmic-dust"></div>
+    </div>
+
+    <!-- Fairy Cursor -->
+    <div class="fairy-cursor" id="fairyCursor">✨</div>
+
+    <!-- Language Selector Portal -->
+    <div class="language-portal">
+        <button class="lang-btn active" onclick="setLanguage('pt')" data-lang="pt">🇧🇷 PT</button>
+        <button class="lang-btn" onclick="setLanguage('en')" data-lang="en">🇺🇸 EN</button>
+    </div>
+
+    <!-- Portal Container -->
+    <div class="portal-container">
+        <header class="portal-header">
+            <h1 class="cosmic-title" data-translate="main-title">Paraíso Elemental</h1>
+            <p class="cosmic-subtitle" data-translate="main-subtitle">Portal da Alquimista Ancestral</p>
+        </header>
+
+        <!-- Main Portal -->
+        <div class="main-portal" onclick="enterPortal()">
+            <div class="portal-ring outer-ring"></div>
+            <div class="portal-ring middle-ring"></div>
+            <div class="portal-ring inner-ring"></div>
+            <div class="portal-core">
+                <img src="assets/images/portal.png" alt="Portal" class="portal-image">
+                <div class="portal-glow"></div>
+            </div>
+            <div class="portal-particles"></div>
+        </div>
+
+        <!-- Portal Elements -->
+        <div class="elemental-orbs">
+            <div class="orb fire-orb" data-element="fire">🔥</div>
+            <div class="orb water-orb" data-element="water">🌊</div>
+            <div class="orb earth-orb" data-element="earth">🌱</div>
+            <div class="orb air-orb" data-element="air">💨</div>
+        </div>
+
+        <!-- Portal Description -->
+        <div class="portal-description">
+            <p data-translate="portal-welcome">
+                Bem-vindo ao portal entre mundos, onde a alquimia ancestral encontra a sabedoria moderna. 
+                Trabalhamos com neuropsicopedagogia, arte visual, design de joias, artesanato 
+                terapia holística e tradicional, ajudando cada um a encontrar seu guia em sua jornada de transformação elemental.
+            </p>
+        </div>
+
+        <!-- Enter Portal Button -->
+        <button class="enter-portal-btn" onclick="enterPortal()" data-translate="enter-portal">
+            Entrar no Portal
+        </button>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <a href="shop.html" class="quick-link" data-translate="quick-shop">🛍️ Loja</a>
+            <a href="cursos.html" class="quick-link" data-translate="quick-courses">📚 Cursos</a>
+            <a href="members.html" class="quick-link" data-translate="quick-members">⭐ Membros</a>
+            <a href="contact.html" class="quick-link" data-translate="quick-contact">📞 Contato</a>
+        </div>
+    </div>
+
+    <!-- Sound Controls -->
+    <div class="sound-controls">
+        <button id="soundToggle" class="sound-btn" onclick="toggleSound()">🔊</button>
+        <button id="musicToggle" class="music-btn" onclick="toggleMusic()">🎵</button>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="cosmicAmbience" loop>
+        <source src="assets/sounds/Whispering_Paraiso_Elemental_Light_adpcm.wav" type="audio/ogg">
+    </audio>
+    <audio id="portalSound">
+        <source src="assets/sounds/portal-enter.ogg" type="audio/ogg">
+    </audio>
+    <audio id="fairySound">
+        <source src="assets/sounds/fairy-ting_light_adpcm.wav" type="audio/ogg">
+    </audio>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/portal.js"></script>
+    <script>
+        // Initialize portal page
+        document.addEventListener('DOMContentLoaded', function() {
+            initPortal();
+            initCosmicBackground();
+            initFairyCursor();
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, 500);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
+
+## 2. HOME.HTML - PÁGINA PRINCIPAL
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Paraíso Elemental</title>
+    <meta name="description" content="Explore o universo da terapia elemental com nossos serviços de neuropsicopedagogia, arte, joias e práticas holísticas.">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a0d3e">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/cosmic-bg.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+<body class="cosmic-bg" data-theme="dark">
+    <!-- Cosmic Background -->
+    <div class="cosmic-container">
+        <div class="stars-layer"></div>
+        <div class="virgo-constellation"></div>
+        <div class="cosmic-dust"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/images/logo.png" alt="Paraíso Elemental">
+                Paraíso Elemental
+            </a>
+            
+            <div class="nav-menu">
+                <a href="home.html" class="nav-link active">Home</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="shop.html" class="nav-link">Loja</a>
+                <a href="cursos.html" class="nav-link">Cursos</a>
+                <a href="members.html" class="nav-link">Membros</a>
+                <a href="contact.html" class="nav-link">Contato</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                <button class="cart-btn" onclick="openCart()">🛒 <span id="cartCount">0</span></button>
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+
+            <button class="mobile-menu-toggle">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title" data-translate="hero-title">Alquimia Elemental</h1>
+            <p class="hero-subtitle" data-translate="hero-subtitle">
+                Transformação através da sabedoria ancestral e práticas modernas
+            </p>
+            <div class="hero-buttons">
+                <a href="members.html" class="btn-primary">Explorar Membros</a>
+                <a href="shop.html" class="btn-secondary">Ver Loja</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-elements">
+                <div class="element fire">🔥</div>
+                <div class="element water">🌊</div>
+                <div class="element earth">🌱</div>
+                <div class="element air">💨</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <h2 class="section-title" data-translate="services-title">Serviços Místicos</h2>
+            <div class="services-grid">
+                <div class="service-card neuropsychopedagogy">
+                    <div class="service-icon">🧠</div>
+                    <h3>Neuropsicopedagogia</h3>
+                    <p>Acompanhamento especializado para dificuldades de aprendizagem com abordagem holística integrativa.</p>
+                    <a href="contact.html?service=neuropsychopedagogy" class="service-link">Agendar Consulta</a>
+                </div>
+                
+                <div class="service-card visual-art">
+                    <div class="service-icon">🎨</div>
+                    <h3>Arte Visual</h3>
+                    <p>Criação de obras que conectam o mundo material com dimensões espirituais e energéticas.</p>
+                    <a href="shop.html?category=art" class="service-link">Ver Obras</a>
+                </div>
+                
+                <div class="service-card sacred-jewelry">
+                    <div class="service-icon">💎</div>
+                    <h3>Joias Sagradas</h3>
+                    <p>Design exclusivo de joias com cristais e símbolos sagrados para proteção e harmonização energética.</p>
+                    <a href="shop.html?category=jewelry" class="service-link">Explorar Joias</a>
+                </div>
+                
+                <div class="service-card holistic-therapy">
+                    <div class="service-icon">🌿</div>
+                    <h3>Terapia Holística</h3>
+                    <p>Sessões terapêuticas integrativas combinando técnicas ancestrais com abordagens modernas.</p>
+                    <a href="contact.html?service=therapy" class="service-link">Agendar Sessão</a>
+                </div>
+                
+                <div class="service-card reiki">
+                    <div class="service-icon">🙏</div>
+                    <h3>Reiki Master</h3>
+                    <p>Canalização de energia universal para cura, equilíbrio e harmonização dos chakras.</p>
+                    <a href="contact.html?service=reiki" class="service-link">Agendar Reiki</a>
+                </div>
+                
+                <div class="service-card courses">
+                    <div class="service-icon">📚</div>
+                    <h3>Cursos & Workshops</h3>
+                    <p>Formações em alquimia elemental, desenvolvimento pessoal e práticas espirituais.</p>
+                    <a href="cursos.html" class="service-link">Ver Cursos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Elemental Section -->
+    <section class="elemental-section">
+        <div class="container">
+            <h2 class="section-title" data-translate="elements-title">Os Quatro Elementos</h2>
+            <div class="elements-grid">
+                <div class="element-card fire-element">
+                    <div class="element-symbol">🔥</div>
+                    <h3>Fogo</h3>
+                    <p>Paixão, transformação, energia vital e força criativa interior.</p>
+                    <div class="element-attributes">
+                        <span>Criatividade</span>
+                        <span>Paixão</span>
+                        <span>Transformação</span>
+                    </div>
+                </div>
+                
+                <div class="element-card water-element">
+                    <div class="element-symbol">🌊</div>
+                    <h3>Água</h3>
+                    <p>Fluidez, emoção, intuição e capacidade de purificação.</p>
+                    <div class="element-attributes">
+                        <span>Intuição</span>
+                        <span>Cura</span>
+                        <span>Fluidez</span>
+                    </div>
+                </div>
+                
+                <div class="element-card earth-element">
+                    <div class="element-symbol">🌱</div>
+                    <h3>Terra</h3>
+                    <p>Estabilidade, manifestação, crescimento e conexão com a natureza.</p>
+                    <div class="element-attributes">
+                        <span>Estabilidade</span>
+                        <span>Manifestação</span>
+                        <span>Crescimento</span>
+                    </div>
+                </div>
+                
+                <div class="element-card air-element">
+                    <div class="element-symbol">💨</div>
+                    <h3>Ar</h3>
+                    <p>Pensamento, comunicação, liberdade e expansão da consciência.</p>
+                    <div class="element-attributes">
+                        <span>Comunicação</span>
+                        <span>Liberdade</span>
+                        <span>Transcendência</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 data-translate="cta-title">Pronto para Sua Transformação?</h2>
+                <p data-translate="cta-description">
+                    Junte-se à nossa comunidade mística e embarque em uma jornada de autodescoberta e crescimento espiritual.
+                </p>
+                <div class="cta-buttons">
+                    <a href="members.html" class="btn-primary">Tornar-se Membro</a>
+                    <a href="contact.html" class="btn-secondary">Falar Conosco</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Paraíso Elemental</h3>
+                    <p>Portal da alquimista ancestral para transformação através dos elementos.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🎵</a>
+                        <a href="#" class="social-link">📺</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Serviços</h4>
+                    <ul>
+                        <li><a href="contact.html?service=neuropsychopedagogy">Neuropsicopedagogia</a></li>
+                        <li><a href="shop.html?category=art">Arte Visual</a></li>
+                        <li><a href="shop.html?category=jewelry">Joias Sagradas</a></li>
+                        <li><a href="contact.html?service=therapy">Terapia Holística</a></li>
+                        <li><a href="contact.html?service=reiki">Reiki</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="cursos.html">Cursos</a></li>
+                        <li><a href="members.html">Membros</a></li>
+                        <li><a href="shop.html">Loja</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li>📧 contato@paraisoelemental.com</li>
+                        <li>📱 WhatsApp: +55 11 99999-9999</li>
+                        <li>📍 São Paulo, Brasil</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Paraíso Elemental. Todos os direitos reservados.</p>
+                <div class="legal-links">
+                    <a href="privacy.html">Privacidade</a>
+                    <a href="terms.html">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cms-integration.js"></script>
+</body>
+</html>
+
+## 3. COSMIC-BG.CSS - BACKGROUND CÓSMICO COM CONSTELAÇÃO DE VIRGEM
+
+```css
+/* Cosmic Background with Virgo Constellation */
+.cosmic-bg {
+    background: radial-gradient(ellipse at center, #1a0d3e 0%, #0a0515 70%, #000000 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.cosmic-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Stars Layer */
+.stars-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+        radial-gradient(2px 2px at 40px 70px, #ffffff, transparent),
+        radial-gradient(1px 1px at 90px 40px, #ffffff, transparent),
+        radial-gradient(1px 1px at 130px 80px, #ffffff, transparent),
+        radial-gradient(2px 2px at 160px 30px, #ffffff, transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+.stars-layer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(1px 1px at 50px 60px, #ffd700, transparent),
+        radial-gradient(1px 1px at 120px 20px, #87ceeb, transparent),
+        radial-gradient(2px 2px at 80px 90px, #ff69b4, transparent),
+        radial-gradient(1px 1px at 180px 50px, #98fb98, transparent);
+    background-repeat: repeat;
+    background-size: 250px 150px;
+    animation: twinkle 6s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* Virgo Constellation */
+.virgo-constellation {
+    position: absolute;
+    top: 20%;
+    right: 15%;
+    width: 300px;
+    height: 400px;
+    opacity: 0.6;
+}
+
+.virgo-constellation::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Cg fill='%23ffd700' stroke='%23ffd700' stroke-width='1'%3E%3C!-- Virgo constellation stars --%3E%3Ccircle cx='50' cy='80' r='2'/%3E%3Ccircle cx='80' cy='60' r='1.5'/%3E%3Ccircle cx='120' cy='90' r='2.5'/%3E%3Ccircle cx='150' cy='70' r='2'/%3E%3Ccircle cx='180' cy='120' r='1.5'/%3E%3Ccircle cx='200' cy='150' r='2'/%3E%3Ccircle cx='170' cy='180' r='1.5'/%3E%3Ccircle cx='140' cy='200' r='2'/%3E%3Ccircle cx='110' cy='230' r='1.5'/%3E%3Ccircle cx='90' cy='280' r='2'/%3E%3Ccircle cx='130' cy='320' r='1.5'/%3E%3Ccircle cx='160' cy='340' r='2'/%3E%3C!-- Constellation lines --%3E%3Cpath d='M50,80 L80,60 L120,90 L150,70 L180,120 L200,150 L170,180 L140,200 L110,230 L90,280 L130,320 L160,340' fill='none' stroke-width='0.5' opacity='0.7'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: constellation-glow 8s ease-in-out infinite;
+}
+
+@keyframes constellation-glow {
+    0%, 100% { 
+        opacity: 0.4;
+        filter: drop-shadow(0 0 10px #ffd700);
+    }
+    50% { 
+        opacity: 0.8;
+        filter: drop-shadow(0 0 20px #ffd700);
+    }
+}
+
+/* Cosmic Dust */
+.cosmic-dust {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(255, 215, 0, 0.1) 0%, 
+        transparent 25%, 
+        rgba(135, 206, 235, 0.1) 50%, 
+        transparent 75%, 
+        rgba(255, 105, 180, 0.1) 100%);
+    animation: cosmic-drift 20s linear infinite;
+}
+
+@keyframes cosmic-drift {
+    0% { transform: translateX(-100px) translateY(-100px) rotate(0deg); }
+    100% { transform: translateX(100px) translateY(100px) rotate(360deg); }
+}
+
+/* Nebula Effect */
+.cosmic-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at 70% 30%, 
+        rgba(138, 43, 226, 0.1) 0%, 
+        transparent 50%
+    ),
+    radial-gradient(
+        ellipse at 30% 70%, 
+        rgba(255, 20, 147, 0.1) 0%, 
+        transparent 50%
+    ),
+    radial-gradient(
+        ellipse at 80% 80%, 
+        rgba(0, 191, 255, 0.1) 0%, 
+        transparent 50%
+    );
+    animation: nebula-flow 30s ease-in-out infinite;
+}
+
+@keyframes nebula-flow {
+    0%,
+
+
+
+
+# ========================
+# NETLIFY CMS CONFIG.YML
+# Paraíso Elemental - Configuração do CMS
+# ========================
+
+backend:
+  name: git-gateway
+  branch: main
+  squash_merges: true
+
+# Configuração de mídia
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+# Configurações gerais
+site_url: https://paraiso-elemental.netlify.app
+display_url: https://paraiso-elemental.netlify.app
+logo_url: /assets/images/logo-paraiso.png
+
+# Configuração local para desenvolvimento
+local_backend: true
+
+# Slug personalizado para URLs amigáveis
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
+
+# ========================
+# COLEÇÕES DO CMS
+# ========================
+
+collections:
+  # ========================
+  # CONFIGURAÇÕES GLOBAIS
+  # ========================
+  - name: "config"
+    label: "⚙️ Configurações Globais"
+    files:
+      - name: "site-config"
+        label: "🌟 Configurações do Site"
+        file: "_data/config.json"
+        fields:
+          - { label: "Nome do Site", name: "site_name", widget: "string", default: "Paraíso Elemental" }
+          - { label: "Descrição", name: "description", widget: "text" }
+          - { label: "Logo", name: "logo", widget: "image" }
+          - { label: "Favicon", name: "favicon", widget: "image" }
+          - { label: "Email de Contato", name: "contact_email", widget: "string" }
+          - { label: "Telefone", name: "phone", widget: "string", required: false }
+          - label: "Redes Sociais"
+            name: "social"
+            widget: "object"
+            fields:
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
+              - { label: "YouTube", name: "youtube", widget: "string", required: false }
+              - { label: "WhatsApp", name: "whatsapp", widget: "string", required: false }
+          - label: "Cores do Tema"
+            name: "theme_colors"
+            widget: "object"
+            fields:
+              - { label: "Cor Primária", name: "primary", widget: "color", default: "#8B4A9C" }
+              - { label: "Cor Secundária", name: "secondary", widget: "color", default: "#4A8B9C" }
+              - { label: "Cor de Destaque", name: "accent", widget: "color", default: "#FFD700" }
+
+  # ========================
+  # PÁGINA HOME
+  # ========================
+  - name: "home"
+    label: "🏠 Página Home"
+    files:
+      - name: "home-content"
+        label: "📝 Conteúdo da Home"
+        file: "_data/home.json"
+        fields:
+          # Hero Section
+          - label: "🌟 Seção Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Título Principal", name: "title", widget: "string" }
+              - { label: "Subtítulo", name: "subtitle", widget: "text" }
+              - { label: "Imagem de Fundo", name: "background_image", widget: "image" }
+              - { label: "Vídeo de Fundo (URL)", name: "background_video", widget: "string", required: false }
+              - { label: "Texto do Botão", name: "cta_text", widget: "string" }
+              - { label: "Link do Botão", name: "cta_link", widget: "string" }
+          
+          # Sobre Section
+          - label: "👤 Seção Sobre"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Descrição", name: "description", widget: "markdown" }
+              - { label: "Foto Perfil", name: "profile_image", widget: "image" }
+              - label: "Certificações"
+                name: "certifications"
+                widget: "list"
+                fields:
+                  - { label: "Nome", name: "name", widget: "string" }
+                  - { label: "Ícone", name: "icon", widget: "image", required: false }
+          
+          # Serviços
+          - label: "✨ Serviços Principais"
+            name: "services"
+            widget: "list"
+            fields:
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Descrição", name: "description", widget: "text" }
+              - { label: "Ícone", name: "icon", widget: "image" }
+              - { label: "Link", name: "link", widget: "string", required: false }
+              - { label: "Preço", name: "price", widget: "string", required: false }
+          
+          # Depoimentos
+          - label: "💬 Depoimentos"
+            name: "testimonials"
+            widget: "list"
+            fields:
+              - { label: "Nome", name: "name", widget: "string" }
+              - { label: "Depoimento", name: "text", widget: "text" }
+              - { label: "Foto", name: "image", widget: "image", required: false }
+              - { label: "Avaliação (1-5)", name: "rating", widget: "number", min: 1, max: 5 }
+
+  # ========================
+  # BLOG
+  # ========================
+  - name: "blog"
+    label: "📝 Blog"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Autor", name: "author", widget: "string", default: "Layze Silva" }
+      - { label: "Descrição Resumida", name: "excerpt", widget: "text" }
+      - { label: "Imagem Destacada", name: "featured_image", widget: "image" }
+      - label: "Categoria"
+        name: "category"
+        widget: "select"
+        options:
+          - "Astrologia"
+          - "Reiki"
+          - "Cristais"
+          - "Meditação"
+          - "Espiritualidade"
+          - "Alquimia"
+          - "Neuropsicopedagogia"
+          - "Arte Terapia"
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+        field: { label: "Tag", name: "tag", widget: "string" }
+      - { label: "Conteúdo", name: "body", widget: "markdown" }
+      - { label: "Publicado", name: "published", widget: "boolean", default: true }
+      - { label: "Em Destaque", name: "featured", widget: "boolean", default: false }
+
+  # ========================
+  # LOJA / PRODUTOS
+  # ========================
+  - name: "products"
+    label: "🛍️ Loja - Produtos"
+    folder: "_products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nome do Produto", name: "title", widget: "string" }
+      - { label: "Descrição Curta", name: "short_description", widget: "text" }
+      - { label: "Descrição Completa", name: "body", widget: "markdown" }
+      - { label: "Preço", name: "price", widget: "number", step: 0.01 }
+      - { label: "Preço com Desconto", name: "sale_price", widget: "number", step: 0.01, required: false }
+      - label: "Imagens do Produto"
+        name: "images"
+        widget: "list"
+        field: { label: "Imagem", name: "image", widget: "image" }
+      - label: "Categoria"
+        name: "category"
+        widget: "select"
+        options:
+          - "Cristais"
+          - "Joias Artesanais"
+          - "Óleos Essenciais"
+          - "Livros Espirituais"
+          - "Cartas Oraculares"
+          - "Incensos"
+          - "Velas Energéticas"
+          - "Arte Terapêutica"
+      - { label: "Estoque", name: "stock", widget: "number", default: 1 }
+      - { label: "SKU", name: "sku", widget: "string", required: false }
+      - { label: "Peso (kg)", name: "weight", widget: "number", step: 0.01, required: false }
+      - { label: "Disponível", name: "available", widget: "boolean", default: true }
+      - { label: "Produto em Destaque", name: "featured", widget: "boolean", default: false }
+      - label: "Propriedades Energéticas"
+        name: "energy_properties"
+        widget: "list"
+        allow_add: true
+        field: { label: "Propriedade", name: "property", widget: "string" }
+
+  # ========================
+  # CURSOS
+  # ========================
+  - name: "courses"
+    label: "🎓 Cursos"
+    folder: "_courses"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nome do Curso", name: "title", widget: "string" }
+      - { label: "Descrição Resumida", name: "excerpt", widget: "text" }
+      - { label: "Descrição Completa", name: "body", widget: "markdown" }
+      - { label: "Imagem do Curso", name: "image", widget: "image" }
+      - { label: "Preço", name: "price", widget: "number", step: 0.01 }
+      - { label: "Duração (horas)", name: "duration", widget: "number" }
+      - { label: "Nível", name: "level", widget: "select", options: ["Iniciante", "Intermediário", "Avançado"] }
+      - label: "Modalidade"
+        name: "modality"
+        widget: "select"
+        options: ["Online", "Presencial", "Híbrido"]
+      - label: "Categoria"
+        name: "category"
+        widget: "select"
+        options:
+          - "Reiki"
+          - "Astrologia"
+          - "Cristaloterapia"
+          - "Numerologia"
+          - "Tarô"
+          - "Meditação"
+          - "Neuropsicopedagogia"
+          - "Arte Terapia"
+      - label: "O que você vai aprender"
+        name: "learning_objectives"
+        widget: "list"
+        field: { label: "Objetivo", name: "objective", widget: "string" }
+      - label: "Módulos do Curso"
+        name: "modules"
+        widget: "list"
+        fields:
+          - { label: "Título do Módulo", name: "title", widget: "string" }
+          - { label: "Descrição", name: "description", widget: "text" }
+          - { label: "Duração", name: "duration", widget: "string" }
+      - { label: "Certificado Incluso", name: "certificate", widget: "boolean", default: true }
+      - { label: "Vagas Disponíveis", name: "spots_available", widget: "number", required: false }
+      - { label: "Data de Início", name: "start_date", widget: "datetime", required: false }
+      - { label: "Ativo", name: "active", widget: "boolean", default: true }
+
+  # ========================
+  # ÁREA DE MEMBROS
+  # ========================
+  - name: "membership"
+    label: "👥 Área de Membros"
+    files:
+      - name: "membership-config"
+        label: "⚙️ Configurações da Membership"
+        file: "_data/membership.json"
+        fields:
+          - label: "🌟 Planos de Membership"
+            name: "plans"
+            widget: "list"
+            fields:
+              - { label: "Nome do Plano", name: "name", widget: "string" }
+              - { label: "Descrição", name: "description", widget: "text" }
+              - { label: "Preço Mensal", name: "monthly_price", widget: "number", step: 0.01 }
+              - { label: "Preço Anual", name: "yearly_price", widget: "number", step: 0.01, required: false }
+              - label: "Benefícios"
+                name: "benefits"
+                widget: "list"
+                field: { label: "Benefício", name: "benefit", widget: "string" }
+              - { label: "Cor do Plano", name: "color", widget: "color" }
+              - { label: "Plano Popular", name: "popular", widget: "boolean", default: false }
+          
+          - label: "📚 Conteúdo Exclusivo"
+            name: "exclusive_content"
+            widget: "list"
+            fields:
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Tipo", name: "type", widget: "select", options: ["Vídeo", "PDF", "Áudio", "Live"] }
+              - { label: "Descrição", name: "description", widget: "text" }
+              - { label: "Nível Necessário", name: "required_level", widget: "select", options: ["Básico", "Premium", "VIP"] }
+              - { label: "Data de Publicação", name: "publish_date", widget: "datetime" }
+
+  # ========================
+  # EVENTOS E WORKSHOPS
+  # ========================
+  - name: "events"
+    label: "📅 Eventos & Workshops"
+    folder: "_events"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Nome do Evento", name: "title", widget: "string" }
+      - { label: "Descrição", name: "body", widget: "markdown" }
+      - { label: "Imagem do Evento", name: "image", widget: "image" }
+      - { label: "Data e Hora", name: "datetime", widget: "datetime" }
+      - { label: "Duração (horas)", name: "duration", widget: "number", step: 0.5 }
+      - { label: "Local", name: "location", widget: "string" }
+      - { label: "Endereço", name: "address", widget: "text", required: false }
+      - { label: "Link do Evento Online", name: "online_link", widget: "string", required: false }
+      - { label: "Preço", name: "price", widget: "number", step: 0.01 }
+      - { label: "Vagas Limitadas", name: "limited_spots", widget: "number", required: false }
+      - label: "Tipo de Evento"
+        name: "event_type"
+        widget: "select"
+        options: ["Workshop", "Palestra", "Vivência", "Retiro", "Curso Intensivo"]
+      - { label: "Evento Ativo", name: "active", widget: "boolean", default: true }
+
+  # ========================
+  # CONSULTAS E ATENDIMENTOS
+  # ========================
+  - name: "services"
+    label: "🔮 Serviços & Consultas"
+    folder: "_services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nome do Serviço", name: "title", widget: "string" }
+      - { label: "Descrição Completa", name: "body", widget: "markdown" }
+      - { label: "Imagem", name: "image", widget: "image" }
+      - { label: "Preço", name: "price", widget: "number", step: 0.01 }
+      - { label: "Duração (minutos)", name: "duration", widget: "number" }
+      - label: "Modalidade"
+        name: "modality"
+        widget: "select"
+        options: ["Presencial", "Online", "Ambos"]
+      - label: "Categoria"
+        name: "category"
+        widget: "select"
+        options:
+          - "Consulta Astrológica"
+          - "Sessão de Reiki"
+          - "Leitura de Tarô"
+          - "Terapia com Cristais"
+          - "Mapa Astral"
+          - "Numerologia"
+          - "Orientação Espiritual"
+          - "Neuropsicopedagogia"
+      - { label: "Disponível para Agendamento", name: "bookable", widget: "boolean", default: true }
+      - label: "Horários Disponíveis"
+        name: "available_times"
+        widget: "list"
+        field: { label: "Horário", name: "time", widget: "string" }
+
+  # ========================
+  # PÁGINAS ESTÁTICAS
+  # ========================
+  - name: "pages"
+    label: "📄 Páginas"
+    files:
+      - name: "about"
+        label: "Sobre Mim"
+        file: "about.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Conteúdo", name: "body", widget: "markdown" }
+      
+      - name: "contact"
+        label: "Contato"
+        file: "contact.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Conteúdo", name: "body", widget: "markdown" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Telefone", name: "phone", widget: "string" }
+          - { label: "Endereço", name: "address", widget: "text" }
+
+# ========================
+# EDITOR SETTINGS
+# ========================
+editor:
+  preview: true
+  
+# Configuração para desenvolvimento local
+local_backend: true
+
+# Configuração de autenticação
+publish_mode: editorial_workflow
+
+# Extensões de arquivo suportadas
+media_library:
+  name: uploadcare
+  config:
+    publicKey: "demopublickey"
+    multiple: true
+    tabs: "file camera url facebook gdrive gphotos dropbox instagram"
+    effects: "crop,rotate,enhance,grayscale"
